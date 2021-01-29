@@ -1,39 +1,15 @@
-import React,{Component} from "react";
+import React from "react";
 import UserItem from "./UserItem";
+import Spinner from "../Layout/Spinner";
+import PropTypes from "prop-types";
 
-
-class Users extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            users:[
-                {
-                    id: "1",
-                    login: "mojombo",
-                    avatar_url:"https://avatars.githubusercontent.com/u/1?v=4",
-                    html_url:"https://github.com/mojombo"
-                },
-                {
-                    id: "2",
-                    login: "defunkt",
-                    avatar_url:"https://avatars.githubusercontent.com/u/2?v=4",
-                    html_url:"https://github.com/defunk"
-                },
-                {
-                    id: "3",
-                    login: "pjhyett",
-                    avatar_url:"https://avatars.githubusercontent.com/u/3?v=4",
-                    html_url:"https://github.com/pjhyett"
-                }
-
-            ]
-        }
-    }
-
-    render(){
+const Users = (props) => {
+    if(props.loading){
+        return <Spinner/>
+    }else{
         return(
             <div style={userStyle}>
-                {this.state.users.map(user => (
+                {props.users.map(user => (
                     <UserItem key={user.id} user={user} />
                 ))}
             </div>
@@ -47,5 +23,9 @@ const userStyle  = {
     gridGap: "1rem"
 };
 
+Users.propTypes = {
+    users: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired
+}
 
 export default Users;
