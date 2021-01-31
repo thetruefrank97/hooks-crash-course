@@ -1,21 +1,20 @@
-import React,{Component,Fragment} from "react";
+import React,{useEffect,Fragment} from "react";
 import Spinner from "../Layout/Spinner";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import Repos from "../Repos/Repos";
 
 
-export class User extends Component{
-    componentDidMount(){
-        this.props.getUser(this.props.match.params.login);
-    }
+const  User = (props) => {
 
-    static propTypes = {
-        loading: PropTypes.bool.isRequired,
-        user: PropTypes.object.isRequired,
-        getUser: PropTypes.func.isRequired
-    }
+    //runs every time component gets rendered
+    useEffect(() => {
+        props.getUser(props.match.params.login);
+        props.getUserRepos(props.match.params.login);
+        //eslint-disable-next-line
+    },[])
 
-    render(){
+
         const {
             name,
             avatar_url,
@@ -30,9 +29,9 @@ export class User extends Component{
             public_gists,
             hireable,
             company
-        }= this.props.user;
+        }= props.user;
 
-        const{loading}=this.props;
+        const{loading,repos}=props;
 
         if(loading){
             return <Spinner/>
@@ -95,12 +94,18 @@ export class User extends Component{
                             Public Gists: {public_gists}
                         </div>
                     </div>
+                    <Repos repos={repos}/>
                 </Fragment>
             )
         }
+}
 
-
-    }
+User.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    user: PropTypes.object.isRequired,
+    getUser: PropTypes.func.isRequired,
+    getUserRepos: PropTypes.func.isRequired,
+    repos: PropTypes.array.isRequired
 }
 
 const Avatar = {

@@ -1,10 +1,10 @@
 import React from "react";
 
-const Alert = ({alert}) => {
+const Alert = (props) => {
     return(
-       alert !==  null && (
-           <div className={`alert alert-${alert.type}`}>
-               <i className="fas fa-info-circle" /> {alert.msg}
+       props.alert !==  null && (
+           <div className={`alert alert-${props.alert.type}`}>
+               <i className="fas fa-info-circle" /> {props.alert.msg}
            </div>
     )
     )
