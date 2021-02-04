@@ -54,6 +54,7 @@ const App = () => {
         );
 
         // this.setState({repos:response.data, loading:false});
+        console.log(response.data);
         setRepos(response.data);
         setLoading(false);
     }
@@ -111,14 +112,6 @@ const App = () => {
                         />
                     </Switch>
                 </div>
-                {/*{loading ? (*/}
-                {/*    <h4>Loading...</h4>*/}
-                {/*    ) : (*/}
-                {/*        <h1>Hello {showName ? name : null}</h1>*/}
-                {/*)}*/}
-                {/*/!*<h1 htmlFor="name">Hello {name}</h1>*!/*/}
-                {/*<h2> Hello {foo()}</h2>*/}
-                {/*<h3>Hello {this.fah()}</h3>*/}
             </div>
             </Router>
             </GithubState>
